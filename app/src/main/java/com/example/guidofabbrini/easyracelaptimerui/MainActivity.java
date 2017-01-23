@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    //onCreated finished
+    //onCreated finished..
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
