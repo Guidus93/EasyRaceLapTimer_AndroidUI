@@ -4,5 +4,5 @@
     <string name="namelabel">"Pilot: "</string>
     <string name="lapcountlabel">"LapCount: "</string>
     <string name="avglaplabel">"Avg Lap Time: "</string>
-
+    <string name="seclabel">" sec"</string>
 </resources>

@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/ranklabel" />
+        android:layout_toEndOf="@+id/ranklabel" />
 
     <TextView
         android:id="@+id/namelabel"
@@ -27,7 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/position"
-        android:layout_toRightOf="@+id/namelabel" />
+        android:layout_toRightOf="@+id/namelabel"
+        android:layout_toEndOf="@+id/namelabel" />
 
 
     <TextView
@@ -43,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:layout_toRightOf="@+id/lapcountlabel"
+        android:layout_toEndOf="@+id/lapcountlabel"
 
         />
 
@@ -58,6 +61,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lapcount"
+        android:layout_toEndOf="@+id/avglaplabel"
         android:layout_toRightOf="@+id/avglaplabel" />
+
+    <TextView
+        android:id="@+id/seclabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lapcount"
+        android:layout_toRightOf="@+id/avg_lap_totext"
+        android:layout_toEndOf="@+id/avg_lap_totext"
+        android:text="@string/seclabel"
+        />
+
 
 </RelativeLayout>
