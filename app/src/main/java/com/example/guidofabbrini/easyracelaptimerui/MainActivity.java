@@ -25,12 +25,25 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    // URL to get contacts JSON
-    private static String url = "http://192.168.42.1/api/v1/monitor";
-    ArrayList<HashMap<String, String>> dataStream;
     private String TAG = MainActivity.class.getSimpleName();
+
     private ProgressDialog pDialog;
+    // A dialog showing a progress indicator and an optional text message or view
+
     private ListView lv;
+
+    // URL to get contacts JSON
+    private static String url = "http://pastebin.com/raw/puYnpK96";
+    //http://192.168.42.1/api/v1/monitor
+
+    ArrayList<HashMap<String, String>> dataStream;
+    /**FAMILY TREE of the HashMap implementation
+     Map Interface is an object that maps keys to values
+     public abstract class AbstractMap --> implements Map < K , V >
+     public class HashMap extends AbstractMap<K, V> implements Map<K, V>
+     This implementation provides all of the optional map operations*/
+
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -41,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dataStream = new ArrayList<>();
+        dataStream =new ArrayList<>();
         lv = (ListView) findViewById(R.id.list);
         new GetData().execute();
 
@@ -50,16 +63,15 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-
-
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Main Page")
-                .setUrl(Uri.parse("http://192.168.42.1/api/v1/monitor"))
+                .setName("Main Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://pastebin.com/raw/puYnpK96"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)
                 .setObject(object)
@@ -111,10 +123,13 @@ public class MainActivity extends AppCompatActivity {
             String jsonStr = sh.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
+            // DOVE STAMPA QUESTO?
 
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
+                        /* It's a public class which extends directly Object, it returns a set of
+                         modifiable name/value mappings*/
 
                     // Getting JSON Array node
                     JSONArray data = jsonObj.getJSONArray("data");
@@ -129,10 +144,10 @@ public class MainActivity extends AppCompatActivity {
                         String team = pilot.getString("team");
                         String lapcount = d.getString("lap_count");
                         String avg_lap_time = d.getString("avg_lap_time");
-                        Float avg_lap_time_sec = (Float.parseFloat(avg_lap_time) / 1000);
+                        Float avg_lap_time_sec = (Float.parseFloat(avg_lap_time)/1000);
                         String avg_lap_totext = Float.toString(avg_lap_time_sec);
-                        // tmp hash map for single contact
 
+                        // tmp hash map for single contact
                         HashMap<String, String> positions = new HashMap<>();
 
                         // adding each child node to HashMap key => value
@@ -180,16 +195,19 @@ public class MainActivity extends AppCompatActivity {
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            /**
-             * Updating parsed JSON data into ListView
-             * */
+
+            //       Updating parsed JSON data into ListView
+
+            //Extended Adapter that is the bridge between a ListView and the data that backs the list,
+            //the ListView can display any data provided that it is wrapped in a ListAdapter
             ListAdapter adapter = new SimpleAdapter(
                     MainActivity.this, dataStream,
-                    R.layout.list_item, new String[]{"position", "name", "lapcount", "avg_lap_totext"}, new int[]{R.id.position,
-                    R.id.name, R.id.lapcount, R.id.avg_lap_totext});
+                    R.layout.list_item, new String[]{"position", "name", "lapcount","avg_lap_totext"}, new int[]{R.id.position,
+                    R.id.name, R.id.lapcount,R.id.avg_lap_totext});
             lv.setAdapter(adapter);
         }
 
     }
 }
+
 
